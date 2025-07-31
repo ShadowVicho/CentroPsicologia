@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Reservas</title>
+    <link rel="stylesheet" href="calendario.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calendario de Reservas</h1>
+        
+        <div class="calendar-header">
+            <div class="month-year" id="current-month-year">Mes Año</div>
+            <div class="calendar-nav">
+                <button id="today">Hoy</button>
+                <button id="next-week">Siguiente Semana</button>
+            </div>
+        </div>
+
+        <div class="days-container" id="days-container">
+            <!-- Los días se generarán dinámicamente con JavaScript -->
+        </div>
+
+        <div class="reservation-summary">
+            <div class="summary-title">Resumen de Reserva</div>
+            <div class="summary-content" id="reservation-summary">
+                <div class="no-selection">No hay reserva seleccionada</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para datos del usuario -->
+    <div id="reservationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Confirmar Reserva</h2>
+            <p>Estás a punto de reservar: <strong id="modalSelectedTime"></strong></p>
+            <form id="reservationForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+
+                <label for="rut">RUT:</label>
+                <input type="text" id="rut" name="rut" required>
+
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required>
+
+                <button type="submit">Confirmar Reserva</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
