@@ -1,0 +1,96 @@
+:root {
+  --color-fondo-claro: #F4F6F8;
+  --color-azul-principal: #3B5A80;
+  --color-azul-secundario: #6C8EAD;
+  --color-acento: #E07A5F;
+  --color-texto: #2E2E2E;
+  --color-boton: #4A90E2;
+}
+
+html, body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+body {
+  background: url('/img/Fondo.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.login-container {
+  background-color: rgba(59, 90, 128, 0.95); /* azul principal con opacidad */
+  padding: 60px 40px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.login-container h2 {
+  color: #ffffff;
+  font-size: 28px;
+  margin-bottom: 35px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+form input,
+form button {
+  width: 100%;
+  padding: 18px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+form input {
+  background-color: #ffffff;
+  color: var(--color-texto);
+}
+
+form input::placeholder {
+  color: #aaaaaa;
+}
+
+form button {
+  background-color: var(--color-boton);
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: var(--color-azul-secundario);
+}
+
+.links {
+  margin-top: 25px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.links a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
