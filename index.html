@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eirene</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="icon" href="img/Icono.png" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+
+  <!-- Contenedor común con fondo -->
+  <div class="top-container">
+
+    <nav class="navbar navbar-expand-lg navbar-light custom-navbar sticky-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="img/Icono.png" alt="Logo" class="logo-img" />
+          <span class="brand-name">Eirene</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link " href="Redes.html" target="_blank">Redes</a></li>
+            <li class="nav-item"><a class="nav-link " href="Servicios.html">Servicios</a></li>
+            <li class="nav-item"><a class="nav-link " href="#">Blog</a></li>
+          </ul>
+          <div class="text-end">
+            <a href="Login.html" class="btn  btn-primary btn-primary-custom">Acceder</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero-section d-flex flex-column justify-content-center align-items-center text-center">
+      <h1 class="display-4 text-black fw-bold mb-4 fuente-personalizada" >Bienvenido</h1>
+      <a href="#agendar" class="btn btn-primary btn-primary-custom">Agenda tu hora</a>
+    </section>
+
+  </div>
+
+<!-- SECCIÓN AGENDAR: Carrusel + tarjetas -->
+<section id="agendar" class="pt-5">
+  <!-- Carrusel ancho completo dentro de esta sección -->
+ <div class="carrusel-wrapper">
+  <div class="carrusel-inner">
+    <!-- Primer bloque -->
+    <div class="carrusel-content">
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+    </div>
+    <!-- Bloque duplicado para loop -->
+    <div class="carrusel-content">
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+    </div>
+    <!--3 BLOQUE TRIPLICADO PARA LOOP-->
+    <div class="carrusel-content">
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+      <span>&nbsp;&nbsp;&nbsp;</span>
+      <span>S</span><span>E</span><span>R</span><span>V</span><span>I</span><span>C</span><span>I</span><span>O</span><span>S</span>
+    </div>
+  </div>
+</div>
+
+  <!-- Contenedor bootstrap para las cards -->
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <!-- Tarjeta 1 -->
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card shadow rounded">
+          <img src="img/Psicoterapia Infanto juvenil.png" class="card-img-top" alt="Psicoterapia Infanto juvenil" style="height: 160px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Psicoterapia Infanto juvenil</h5>
+            <p class="card-text">$30.000 <br>Atención particular y Fonasa, modalidad presencial y online <br><br>
+              -(Modalidad online sólo para mayores de 8 años) <br>
+              -(Modalidad online sólo para Chile).
+            </p>
+            <a href="calendario_reservas/index.html" class="btn btn-primary btn-primary-custom">Agendar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card shadow rounded">
+          <img src="img/Psicoterapia adultos.png" class="card-img-top" alt="Psicoterapia Familiar y Parental" style="height: 180px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Psicoterapia Familiar y Parental</h5>
+            <p class="card-text">$35.000 <br> Atención particular y Fonasa, modalidad presencial y online <br><br>
+              -(Modalidad online sólo para Chile)
+            </p>
+            <a href="calendario_reservas/index.html" class="btn btn-primary btn-primary-custom">Agendar</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="col-md-4 col-sm-6 mb-4">
+        <div class="card shadow rounded">
+          <img src="img/Psicoterapia Familiar y Parental.png" class="card-img-top" alt="Psicoterapia adultos" style="height: 180px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Psicoterapia adultos</h5>
+            <p class="card-text">$30.000 <br>Atención particular y Fonasa, modalidad presencial y online <br><br>
+              -(Modalidad online sólo para Chile).
+            </p>
+            <a href="calendario_reservas/index.html" class="btn btn-primary btn-primary-custom">Agendar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="container" id="nosotros">
+  <!-- Flickity HTML init -->
+  
+    <div class="row g-4 align-items-start">
+      <div class="col-12 col-md-6 image-container">
+        <img 
+          src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4fed5e9c-4e87-49b3-b914-8447c8e2f76b.png" 
+          alt="Escenario de naturaleza con montañas, cielo azul claro y luminosidad natural" 
+          onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/aea556d9-68cd-42af-b6ed-1ab8ceee5f2d.png';"
+        />
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="nosotros-box">
+          <div class="nosotros-title">Nosotros</div>
+          <p>
+            Somos un equipo dedicado a entregar soluciones innovadoras y eficientes para nuestros clientes. Nuestro compromiso es con la calidad, la transparencia y la satisfacción total de quienes confían en nosotros.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--FOTTER PIE DE PAGINA-->
+  <footer class="footer text-center text-lg-start mt-5">
+  <div class="container p-4">
+    <div class="row">
+      <!-- Sobre nosotros -->
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase fw-bold">Eirene</h5>
+        <p class="text-muted">
+          Espacio terapéutico para acompañarte en tu proceso personal. Atención online y presencial.
+        </p>
+      </div>
+
+      <!-- Enlaces -->
+      <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase fw-bold">Enlaces útiles</h5>
+        <ul class="list-unstyled mb-0">
+          <li><a href="Servicios.html" class="text-muted text-decoration-none">Servicios</a></li>
+          <li><a href="Redes.html" class="text-muted text-decoration-none" target="_blank">Redes</a></li>
+          <li><a href="#" class="text-muted text-decoration-none">Blog</a></li>
+          <li><a href="Login.html" class="text-muted text-decoration-none">Acceder</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase fw-bold">Contacto</h5>
+        <p class="text-muted mb-1">📍 Independencia 760, Chillán, Región de Ñuble, Chile</p>
+        <p class="text-muted mb-1">📧 psijovanarubilardelahoz@gmail.com</p>
+        <p class="text-muted">📱 +56 9 4625 5025</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parte inferior -->
+  <div class="text-center p-3 copyright-bar">
+    © 2025 WidowNetwork. Todos los derechos reservados.
+  </div>
+</footer>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

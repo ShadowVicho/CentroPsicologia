@@ -1,0 +1,238 @@
+:root {
+  --color-fondo: #F5F5F5;
+  --color-verde-menta: #A8D5BA;
+  --color-azul-cta: #4A90E2;
+  --color-azul-hover: #3A78C2;
+  --color-lila: #D8CFE8;
+  --color-texto-principal: #4A4A4A;
+  --color-texto-secundario: #7D7D7D;
+  --blanco: #ffffff;
+}
+
+@font-face {
+  font-family: 'UrbanJungle';
+  src: url('/fonts/FormaleScript_PERSONAL_USE_ONLY.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Morgan';
+  src: url('/fonts/Morgan.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fuente-personalizada {
+  font-family: 'UrbanJungle', cursive;
+  font-size: 5rem;
+}
+
+/* Fondo general */
+body {
+  background-color: var(--color-fondo);
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+}
+
+.top-container {
+  background: url('img/Fondo_Inicio_bk.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.custom-navbar {
+  background-color: var(--blanco);
+  padding: 18px 30px;
+  max-width: 1000px;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  top: 30px !important;
+}
+
+
+/* Logo */
+.logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px; /* <<< esto agrega el espacio entre imagen y texto */
+}
+/* Nombre marca */
+.brand-name {
+  font-weight: 700;
+  color: black;
+}
+/* Enlaces navbar */
+.nav-link {
+  color: var(--color-texto-principal) !important;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 10px 15px;
+}
+
+.nav-link:hover {
+  color: var(--color-azul-cta) !important;
+}
+
+/* Botón primario */
+.btn-primary-custom {
+  background-color: var(--color-azul-cta);
+  color: var(--blanco);
+  padding: 10px 25px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--color-azul-hover);
+  color: var(--blanco);
+}
+
+/* Hero section */
+.hero-section {
+  min-height: 80vh; /* para que se vea grande pero no 100vh */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--blanco);
+  padding: 40px 20px 60px;
+}
+.carrusel-wrapper {
+  width: 100vw;
+  overflow: hidden;
+  margin-left: calc(-50vw + 50%);
+  background-color: transparent; /* o lo que uses */
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
+
+.carrusel-inner {
+  display: flex;
+  width: max-content;
+  animation: moverCarrusel 12s linear infinite;
+}
+
+.carrusel-content {
+  display: flex;
+  white-space: nowrap;
+}
+
+.carrusel-content span {
+  font-size: 50px;       /* tamaño base */
+  font-family: 'Morgan', sans-serif; /* tu fuente */
+  color: rgb(0, 0, 0);
+  padding: 0 10px;
+  user-select: none;
+  
+  /* Escalado para agrandar sin afectar layout */
+  transform-origin: center center;
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}
+
+/* Animación mueve 50% para hacer loop */
+@keyframes moverCarrusel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.carrusel-content + .carrusel-content {
+  margin-left: 3rem; /* espacio para separar los bloques */
+}
+
+
+
+/*HACER CARDS MAS GRANDES*/
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.card:hover {
+  transform: scale(1.05) translateY(-10px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+/*NOSOTROS CONTAINER*/
+    .image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .nosotros-box {
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      height: 100%;
+    }
+    .nosotros-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      border-bottom: 2px solid #0d6efd;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      color: #0d6efd;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*PIE DE PAGINA*/
+
+.footer {
+  background-color: var(--color-lila);
+  color: var(--color-texto-principal);
+  padding-top: 40px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  margin-top: 60px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer h5 {
+  color: var(--color-texto-principal);
+  margin-bottom: 20px;
+}
+
+.footer a:hover {
+  color: var(--color-azul-cta);
+}
+
+.footer .copyright-bar {
+  background-color: rgba(0, 0, 0, 0.05);
+  font-size: 0.9rem;
+  color: var(--color-texto-secundario);
+  padding: 15px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}

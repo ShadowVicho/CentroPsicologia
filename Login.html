@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link rel="stylesheet" href="css/Login.css" />
+  <link rel="icon" href="../img/Icono.png" type="image/x-icon" />
+</head>
+<body >
+  <div class="login-container">
+    <h2>Bienvenido</h2>
+    <!-- Aquí he agregado un action que redirige al usuario al dashboard o una página de procesamiento -->
+<form method="POST" action="calendario_reservas/login.php">
+    <input type="text" name="username" placeholder="Nombre de usuario" required>
+    <input type="password" name="password" placeholder="Contraseña" required>
+    <button type="submit">Iniciar sesión</button>
+</form>
+
+
+    <div class="links">
+      <a href="#">¿Perdiste tu contraseña?</a><br>
+      <a href="../index.html">Regresar al inicio</a>
+    </div>
+  </div>
+
+
+</body>
+</html>

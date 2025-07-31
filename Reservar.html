@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Reservas</title>
+    <style>
+        :root {
+            --color-primary: #4a6fa5;
+            --color-secondary: #166088;
+            --color-accent: #4fc3f7;
+            --color-disabled: #e0e0e0;
+            --color-text: #333;
+            --color-text-light: #fff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--color-text);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--color-secondary);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--color-secondary);
+        }
+
+        button:disabled {
+            background-color: var(--color-disabled);
+            cursor: not-allowed;
+        }
+
+        .month-year {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .days-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .day {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 15px;
+            min-height: 300px;
+        }
+
+        .day-header {
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+
+        .time-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .time-slot {
+            padding: 8px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .time-slot.available {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+
+        .time-slot.available:hover {
+            background-color: #c8e6c9;
+        }
+
+        .time-slot.reserved {
+            background-color: #ffebee;
+            color: #c62828;
+            text-decoration: line-through;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .time-slot.selected {
+            background-color: var(--color-accent);
+            color: white;
+            font-weight: bold;
+        }
+
+        .closed-day {
+            background-color: #f5f5f5;
+            color: #9e9e9e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-style: italic;
+        }
+
+        .reservation-summary {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .summary-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--color-secondary);
+        }
+
+        .summary-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .no-selection {
+            color: #9e9e9e;
+            font-style: italic;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .days-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .days-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calendario de Reservas</h1>
+        
+        <div class="calendar-header">
+            <div class="month-year" id="current-month-year">Mes Año</div>
+            <div class="calendar-nav">
+                <button id="prev-week">Semana Anterior</button>
+                <button id="today">Hoy</button>
+                <button id="next-week">Siguiente Semana</button>
+            </div>
+        </div>
+
+        <div class="days-container" id="days-container">
+            <!-- Los días se generarán dinámicamente con JavaScript -->
+        </div>
+
+        <div class="reservation-summary">
+            <div class="summary-title">Resumen de Reserva</div>
+            <div class="summary-content" id="reservation-summary">
+                <div class="no-selection">No hay reserva seleccionada</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configuración inicial
+            const config = {
+                workingHours: {
+                    start: 8, // 8am
+                    end: 17, // 5pm
+                },
+                workingDays: [3, 4, 5, 6], // Miércoles (3) a Sábado (6), Dom(0), Lun(1) y Mar(2) cerrados
+                slotDuration: 60, // 60 minutos por reserva
+                closedMessage: "Cerrado",
+                timeFormat: '12h' // '12h' o '24h'
+            };
+
+            // Estado de la aplicación
+            let state = {
+                currentDate: new Date(),
+                reservations: loadReservations(),
+                selectedSlot: null
+            };
+
+            // Elementos del DOM
+            const elements = {
+                daysContainer: document.getElementById('days-container'),
+                monthYear: document.getElementById('current-month-year'),
+                prevWeek: document.getElementById('prev-week'),
+                today: document.getElementById('today'),
+                nextWeek: document.getElementById('next-week'),
+                reservationSummary: document.getElementById('reservation-summary')
+            };
+
+            // Manejo de eventos
+            elements.prevWeek.addEventListener('click', () => {
+                state.currentDate.setDate(state.currentDate.getDate() - 7);
+                renderCalendar();
+            });
+
+            elements.nextWeek.addEventListener('click', () => {
+                state.currentDate.setDate(state.currentDate.getDate() + 7);
+                renderCalendar();
+            });
+
+            elements.today.addEventListener('click', () => {
+                state.currentDate = new Date();
+                renderCalendar();
+            });
+
+            // Inicializar el calendario
+            renderCalendar();
+
+            function renderCalendar() {
+                elements.daysContainer.innerHTML = '';
+                updateMonthYearDisplay();
+
+                const weekStart = getWeekStartDate(state.currentDate);
+                
+                // Mostrar solo los días de trabajo (miércoles a sábado)
+                for (let i = 3; i <= 6; i++) {
+                    const currentDate = new Date(weekStart);
+                    currentDate.setDate(weekStart.getDate() + (i - weekStart.getDay()));
+                    
+                    renderDay(currentDate);
+                }
+            }
+
+            function renderDay(date) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day';
+
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'day-header';
+                dayHeader.textContent = formatDayHeader(date);
+                dayElement.appendChild(dayHeader);
+
+                // Verificar si es día de trabajo
+                if (!config.workingDays.includes(date.getDay())) {
+                    const closedMessage = document.createElement('div');
+                    closedMessage.className = 'closed-day';
+                    closedMessage.textContent = config.closedMessage;
+                    dayElement.appendChild(closedMessage);
+                } else {
+                    const timeSlots = document.createElement('div');
+                    timeSlots.className = 'time-slots';
+
+                    // Generar franjas horarias
+                    for (let hour = config.workingHours.start; hour < config.workingHours.end; hour++) {
+                        const slotTime = new Date(date);
+                        slotTime.setHours(hour, 0, 0, 0);
+
+                        const slotKey = getSlotKey(slotTime);
+                        const isReserved = state.reservations.some(r => r.slot === slotKey);
+                        const isSelected = state.selectedSlot && state.selectedSlot.slot === slotKey;
+
+                        const slotElement = document.createElement('div');
+                        slotElement.className = `time-slot ${isReserved ? 'reserved' : 'available'} ${isSelected ? 'selected' : ''}`;
+                        slotElement.textContent = formatTime(hour);
+                        
+                        if (!isReserved) {
+                            slotElement.addEventListener('click', () => handleSlotClick(slotTime, slotKey));
+                        }
+
+                        timeSlots.appendChild(slotElement);
+                    }
+
+                    dayElement.appendChild(timeSlots);
+                }
+
+                elements.daysContainer.appendChild(dayElement);
+            }
+
+            function handleSlotClick(slotTime, slotKey) {
+                state.selectedSlot = {
+                    date: slotTime,
+                    slot: slotKey,
+                    formattedTime: formatDayHeader(slotTime) + ' ' + formatTime(slotTime.getHours())
+                };
+                
+                renderCalendar();
+                updateReservationSummary();
+            }
+
+            function updateReservationSummary() {
+                if (state.selectedSlot) {
+                    elements.reservationSummary.innerHTML = `
+                        <div><strong>Reserva seleccionada:</strong></div>
+                        <div>${state.selectedSlot.formattedTime}</div>
+                        <button id="confirm-reservation" style="margin-top: 10px;">Confirmar Reserva</button>
+                        <button id="cancel-reservation" style="margin-top: 5px; background-color: #f44336;">Cancelar Selección</button>
+                    `;
+
+                    document.getElementById('confirm-reservation').addEventListener('click', confirmReservation);
+                    document.getElementById('cancel-reservation').addEventListener('click', cancelSelection);
+                } else {
+                    elements.reservationSummary.innerHTML = '<div class="no-selection">No hay reserva seleccionada</div>';
+                }
+            }
+
+            function confirmReservation() {
+                if (state.selectedSlot) {
+                    state.reservations.push({
+                        slot: state.selectedSlot.slot,
+                        date: state.selectedSlot.date,
+                        time: formatTime(state.selectedSlot.date.getHours()),
+                        day: formatDayHeader(state.selectedSlot.date)
+                    });
+                    
+                    saveReservations(state.reservations);
+                    state.selectedSlot = null;
+                    renderCalendar();
+                    updateReservationSummary();
+                    alert('Reserva confirmada exitosamente');
+                }
+            }
+
+            function cancelSelection() {
+                state.selectedSlot = null;
+                renderCalendar();
+                updateReservationSummary();
+            }
+
+            function updateMonthYearDisplay() {
+                const options = { month: 'long', year: 'numeric' };
+                elements.monthYear.textContent = state.currentDate.toLocaleDateString('es-ES', options);
+            }
+
+            // Funciones de utilidad
+            function getWeekStartDate(date) {
+                const result = new Date(date);
+                result.setDate(date.getDate() - date.getDay() + 3); // Empieza en miércoles (3)
+                return result;
+            }
+
+            function formatDayHeader(date) {
+                const options = { weekday: 'long', day: 'numeric' };
+                return date.toLocaleDateString('es-ES', options);
+            }
+
+            function formatTime(hour) {
+                const hourNumber = typeof hour === 'number' ? hour : hour.getHours();
+                
+                if (config.timeFormat === '12h') {
+                    const ampm = hourNumber >= 12 ? 'PM' : 'AM';
+                    const displayHour = hourNumber % 12 || 12;
+                    return `${displayHour}:00 ${ampm}`;
+                } else {
+                    return `${hourNumber}:00`;
+                }
+            }
+
+            function getSlotKey(date) {
+                return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}`;
+            }
+
+            // Persistencia de datos
+            function saveReservations(reservations) {
+                localStorage.setItem('calendarReservations', JSON.stringify(reservations));
+            }
+
+            function loadReservations() {
+                const saved = localStorage.getItem('calendarReservations');
+                return saved ? JSON.parse(saved) : [];
+            }
+        });
+    </script>
+</body>
+</html>
